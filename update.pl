@@ -37,7 +37,16 @@ sub ldapfinduser
 	my $mesg = $ad->search(base =>"OU=ACMUsers,DC=acm,DC=cs", filter => "sAMAccountName=$username");
 	foreach my $entry ($mesg->entries)
 	{
-		print $entry->dn();
+		my $mesg = $ad->modify
+		(
+			$entry->dn(),
+			add => [ msSFU30NisDomain => 'acm' ],
+			replace => [ msSFU30Name => "$username" ],
+			replace => [ uidNumber => "$uid" ],
+			add => [ gidNumber => "$gid" ],
+			replace => [ unixHomeDirectory => "/home/$username" ],
+			replace => [ loginShell => "/bin/bash" ]
+		);
 		print "\n";
 	}
 }
