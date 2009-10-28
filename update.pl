@@ -53,7 +53,8 @@ sub ldapfinduser
 		#LDAPerror($mesg);
 		$mesg = $ad->modify( $entry->dn(), add => { msSFU30Name => "$username" } );
 		#LDAPerror($mesg);
-		$mesg = $ad->modify( $entry->dn(), add => { gidNumber => "$gid" } );
+		$mesg = $ad->modify( $entry->dn(), add => { gidNumber => "100" } );
+		$mesg = $ad->modify( $entry->dn(), replace => { gidNumber => "100" } );
 		#LDAPerror($mesg);
 		$mesg = $ad->modify( $entry->dn(), add => { uidNumber => "$uid" } );
 		#LDAPerror($mesg);
