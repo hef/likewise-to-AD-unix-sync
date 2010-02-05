@@ -58,6 +58,7 @@ sub ldapfinduser
 		#LDAPerror($mesg);
 		$mesg = $ad->modify( $entry->dn(), add => { uidNumber => "$uid" } );
 		#LDAPerror($mesg);
+		$mesg = $ad->modify( $entry->dn(), add => { LoginShell => "/bin/bash" } );
 
 
 
